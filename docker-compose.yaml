@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  # reverse proxy
+  nginx:
+    image: nginx:1.19.6
+    ports:
+      - '80:80'
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - dynamodb
+      - react
+  # all base DB(DynamoDB)
+  dynamodb:
+    image: amazon/dynamodb-local
+    volumes:
+      - dynamodb:/home/dynamodblocal
+    command: '-jar DynamoDBLocal.jar -sharedDb -dbPath /home/dynamodblocal'
+  # frontend
+  react:
+    build: ./frontend
+    volumes:
+      - ./frontend/app:/app:cached
+    command: 'npm start'
+    ports:
+      - '3000:3000'
+
+volumes:
+  dynamodb: {}
