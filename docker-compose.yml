@@ -19,12 +19,13 @@ services:
     command: '-jar DynamoDBLocal.jar -sharedDb -dbPath /home/dynamodblocal'
   # frontend
   react:
+    image: frontend-runtime
     build: ./frontend
     volumes:
-      - ./frontend/app:/app:cached
-    command: 'npm start'
-    ports:
-      - '3000:3000'
+      - 'react-excluded-volumes:/workspace/frontend/app/node_modules'
+      - './frontend/app:/workspace/frontend/app'
+    command: npm start
 
 volumes:
   dynamodb: {}
+  react-excluded-volumes: {}

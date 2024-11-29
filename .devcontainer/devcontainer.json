@@ -1,0 +1,16 @@
+{
+    "name": "tournament-react-web",
+    "dockerComposeFile": ["../docker-compose.yml", "docker-compose.override.yml"],
+    "service": "react",
+    "workspaceFolder": "/workspace",
+    "remoteUser": "devuser",
+    "updateRemoteUserUID": true,
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "mhutchie.git-graph",
+                "ms-azuretools.vscode-docker",
+            ]
+        }
+    }
+}

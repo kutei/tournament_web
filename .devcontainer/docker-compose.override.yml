@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  react:
+    image: frontend-devel
+    volumes:
+      - 'react-excluded-volumes:/workspace/frontend/app/node_modules'
+      - '.:/workspace'
+      - '$HOME/.gitconfig:/home/devuser/.gitconfig:ro'
+    command: sleep infinity
